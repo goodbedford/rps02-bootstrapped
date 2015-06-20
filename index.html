@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script data-require="jquery@2.1.4" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/script.js"></script>
+    <title>Rock,Paper,Scissors</title>
+</head>
+
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="col-xs-12 text-center"><span class="logo-color">R</span>ock, <span class="logo-color">P</span>aper,
+                <span class="logo-color">S</span>cissor</h1>
+        </div>
+        <div id="instructionRow" class="row">
+            <p id="instructionBox" class="col-xs-12 text-center secondary-color"></p>
+        </div>
+            <p class="col-xs-12 text-center">
+                <label>Enter Move:</label>
+                <input type="text" id="playerMovesInput" />
+                <button type="button" id="btnSubmit">submit</button>
+            </p>
+        </div>
+        <div class="row">
+            <div id="gRoundBox" class="col-xs-12 text-center"></div>
+        </div>
+        <div id="playersRow" class="row">
+            <!--<div id="gameRoundBox" class="col-xs-12 text-center"></div> -->
+            <div id="playerBox" class="col-xs-1 col-xs-offset-4 text-center">Player</div>
+            <div id="computerBox" class="col-xs-1 col-xs-offset-2 text-center">Computer</div>
+        </div>
+        <div id="movesRow" class="row">
+            <div id="playerMoveBox" class="col-xs-1 col-xs-offset-4 text-center"></div>
+            <div id="movesBox" class="col-xs-2 text-center">Moves</div>
+            <div id="computerMoveBox" class="col-xs-1 text-center"></div>
+        </div>
+        <div id="winsRow" class="row">
+            <div id="playerWinsBox" class="col-xs-1 col-xs-offset-4 text-right"></div>
+            <div id="winBox" class="col-xs-2 text-center">Wins</div>
+            <div id="computerWinsBox" class="col-xs-1 text-left"></div>
+        </div>
+        <div id="tiesRow" class="row ties">
+            <div id="playerTiesBox" class="col-xs-1 col-xs-offset-4 text-right"></div>
+            <div id="tiesBox" class="col-xs-2 text-center">Ties</div>
+            <div id="computerTiesBox" class="col-xs-1 text-left"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <button type="button" id="btnStart">Start Game</button>
+            </div>
+        </div>
+        <div class="row">
+            <p class="col-xs-12 text-center" id="errorBox"></p>
+        </div>
+    </div>
+
+<script src="js/bootstrap.js"></script>
+</body>
+
+</html>
