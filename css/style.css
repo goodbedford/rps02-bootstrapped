@@ -9,7 +9,7 @@ button {
 
 .error {
     color: red;
-    border:1px solid red;
+    font-size: 2em;
 }
 
 .logo-color{
@@ -33,4 +33,7 @@ button {
 }
 .tieBorder, .loserBorder{
     border-bottom: .25em solid red;
+}
+
+div{
 }

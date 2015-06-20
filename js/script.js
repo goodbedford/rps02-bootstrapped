@@ -3,8 +3,6 @@ $(document).ready(function(){
 
     var $instructionBox = $('#instructionBox'),
         $playerMovesInput = $("#playerMovesInput"),
-        $gameRoundBox = $('#gameRoundBox'),
-        $statLineBox = $('#statLineBox'),
         $tiesRow = $('#tiesRow'),
         $btnStart = $('#btnStart'),
         $btnSubmit = $('#btnSubmit'),
@@ -20,7 +18,6 @@ $(document).ready(function(){
         ties = 0;
 
     function getInput() {
-        //$instructionBox.html("Please choose either 'rock', 'paper', or 'scissors'.");
         return $playerMovesInput.val();
     }
 
@@ -94,61 +91,52 @@ $(document).ready(function(){
     }
 
     function playerWinDecoration(){
-        removeWinDecoration();
+        $playerImgMoveBox.removeClass("tieBorder loserBorder");
         $playerImgMoveBox.addClass("winnerBorder");
     }
     function computerWinDecoration(){
-        removeWinDecoration();
+        $computerImgMoveBox.removeClass("tieBorder loserBorder");
         $computerImgMoveBox.addClass("winnerBorder");
     }
     function tieDecoration(){
         removeWinDecoration();
         $computerImgMoveBox.addClass("tieBorder");
         $playerImgMoveBox.addClass("tieBorder");
-
     }
     function playerLoserDecoration(){
+        $playerImgMoveBox.removeClass("tieBorder winnerBorder");
         $playerImgMoveBox.addClass("loserBorder");
-
     }
     function computerLoserDecoration(){
+        $computerImgMoveBox.removeClass("tieBorder winnerBorder");
         $computerImgMoveBox.addClass("loserBorder");
     }
     function removeWinDecoration(){
-        $playerImgMoveBox.css("class", "");
-        $computerImgMoveBox.css("class", "");
+        $computerImgMoveBox.removeClass("winnerBorder loserBorder");
+        $playerImgMoveBox.removeClass("winnerBorder loserBorder");
     }
-
     function statLine(){
-        var stats ="";
         $('#playerWinsBox').html(playerWins);
         $('#computerWinsBox').html(computerWins);
         $('#playerTiesBox').html(ties);
         $('#computerTiesBox').html(ties);
-        //stats += "Game Stats<br />";
-        //stats += "Player Wins: " + playerWins +
-        //    "  " + "Computer Wins: "  +
-        //    computerWins + "  " + "Ties: " + ties;
-        //$statLineBox.html(stats);
     }
 
     function gameRound() {
-        var rounds ="";
-        rounds = "";
         $('#gRoundBox').html(counter + "<br />" + "Rounds");
         $('#playerMoveBox').html(playerMove);
         $('#computerMoveBox').html(computerMove);
-        $playerImgMoveBox.html("<img class='imgItems' src='img/" + playerMove + ".jpeg' alt='player move'>");
-        $computerImgMoveBox.html("<img class='imgItems' src='img/" + computerMove + ".jpeg' alt='computer move'>");
-        ////rounds += "Round: " + counter + "<br />";
-        //rounds +="Player Move: " + playerMove +
-        //    "  |  Computer Move: " + computerMove;
-        //$gameRoundBox.html(rounds);
+
+        $playerImgMoveBox.html("<img class='imgItems' src='img/" + (playerMove ? playerMove: "errorIcon") + ".jpg' alt='player move'>").fadeIn(2000);
+        $computerImgMoveBox.html("<img class='imgItems' src='img/" + (computerMove ? computerMove: "errorIcon") + ".jpg' alt='computer move'>").fadeIn(2000);
     }
 
     function playRound(){
+        $playerImgMoveBox.fadeOut(5);
+        $computerImgMoveBox.fadeOut(5);
         playerMove = getPlayerMove(playerMove);
         computerMove = getComputerMove(computerMove);
+        $errorBox.html("");
 
         switch (getWinner(playerMove, computerMove)){
             case "tie":
@@ -182,7 +170,7 @@ $(document).ready(function(){
                 break;
             default:
                 $errorBox.addClass("error");
-                $errorBox.html("error");
+                $errorBox.html("error: wrong input");
                 tieDecoration();
                 playerMove = "";
                 computerMove = "";
@@ -203,23 +191,24 @@ $(document).ready(function(){
             winnerDiv.html("<h1>Player Wins!!</h>");
             $tiesRow.append(winnerDiv);
             $playerMovesInput.val("");
-            $playerMovesInput.parent().fadeOut();
-            $instructionBox.fadeOut();
+            $playerMovesInput.parent().fadeTo(100,0);
+            $instructionBox.fadeTo(100,0);
         }else{
             winnerDiv.html("<h1>Computer Wins!!</h1>");
             $tiesRow.append(winnerDiv);
             $playerMovesInput.val("");
-            $playerMovesInput.parent().fadeOut();
-            $instructionBox.fadeOut();
+            $playerMovesInput.parent().fadeTo(100,0);
+            $instructionBox.fadeTo(100,0);
         }
     }
 
     $btnStart.click(function(){
         $instructionBox.html("Please choose 'rock', 'paper', or 'scissors'.");
+        $(this).hide();
     });
 
     $btnSubmit.click(function(){
-        removeWinDecoration();
+        //removeWinDecoration();
         if(!checkMoreGames()){
             endGame();
         }else{
