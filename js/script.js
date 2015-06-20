@@ -9,6 +9,8 @@ $(document).ready(function(){
         $btnStart = $('#btnStart'),
         $btnSubmit = $('#btnSubmit'),
         $errorBox = $('#errorBox'),
+        $playerImgMoveBox = $('#playerImgMoveBox'),
+        $computerImgMoveBox = $('#computerImgMoveBox'),
         playerWins = 0,
         computerWins = 0,
         playerMove = "",
@@ -91,6 +93,32 @@ $(document).ready(function(){
         return winner;
     }
 
+    function playerWinDecoration(){
+        removeWinDecoration();
+        $playerImgMoveBox.addClass("winnerBorder");
+    }
+    function computerWinDecoration(){
+        removeWinDecoration();
+        $computerImgMoveBox.addClass("winnerBorder");
+    }
+    function tieDecoration(){
+        removeWinDecoration();
+        $computerImgMoveBox.addClass("tieBorder");
+        $playerImgMoveBox.addClass("tieBorder");
+
+    }
+    function playerLoserDecoration(){
+        $playerImgMoveBox.addClass("loserBorder");
+
+    }
+    function computerLoserDecoration(){
+        $computerImgMoveBox.addClass("loserBorder");
+    }
+    function removeWinDecoration(){
+        $playerImgMoveBox.css("class", "");
+        $computerImgMoveBox.css("class", "");
+    }
+
     function statLine(){
         var stats ="";
         $('#playerWinsBox').html(playerWins);
@@ -110,6 +138,8 @@ $(document).ready(function(){
         $('#gRoundBox').html(counter + "<br />" + "Rounds");
         $('#playerMoveBox').html(playerMove);
         $('#computerMoveBox').html(computerMove);
+        $playerImgMoveBox.html("<img class='imgItems' src='img/" + playerMove + ".jpeg' alt='player move'>");
+        $computerImgMoveBox.html("<img class='imgItems' src='img/" + computerMove + ".jpeg' alt='computer move'>");
         ////rounds += "Round: " + counter + "<br />";
         //rounds +="Player Move: " + playerMove +
         //    "  |  Computer Move: " + computerMove;
@@ -125,6 +155,7 @@ $(document).ready(function(){
                 ties += 1;
                 gameRound();
                 statLine();
+                tieDecoration();
                 playerMove = null;
                 computerMove = null;
                 counter += 1;
@@ -133,6 +164,8 @@ $(document).ready(function(){
                 playerWins +=1;
                 gameRound();
                 statLine();
+                playerWinDecoration();
+                computerLoserDecoration();
                 playerMove = null;
                 computerMove = null;
                 counter +=1;
@@ -141,6 +174,8 @@ $(document).ready(function(){
                 computerWins +=1;
                 gameRound();
                 statLine();
+                computerWinDecoration();
+                playerLoserDecoration();
                 playerMove = null;
                 computerMove = null;
                 counter +=1;
@@ -148,6 +183,7 @@ $(document).ready(function(){
             default:
                 $errorBox.addClass("error");
                 $errorBox.html("error");
+                tieDecoration();
                 playerMove = "";
                 computerMove = "";
                 counter += 1;
@@ -183,7 +219,7 @@ $(document).ready(function(){
     });
 
     $btnSubmit.click(function(){
-
+        removeWinDecoration();
         if(!checkMoreGames()){
             endGame();
         }else{

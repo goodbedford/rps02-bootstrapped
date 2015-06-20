@@ -22,5 +22,15 @@ button {
 }
 .secondary-color{
     color: #eb9316;
-    font-size: 2em;
+}
+.imgItems{
+    height: 5em;
+    margin: 0 auto 5px auto;
+}
+
+.winnerBorder{
+    border-bottom: .25em solid greenyellow;
+}
+.tieBorder, .loserBorder{
+    border-bottom: .25em solid red;
 }
